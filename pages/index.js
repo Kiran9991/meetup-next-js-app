@@ -1,7 +1,26 @@
-// our-domain/index
+// our-domain.com/
 
-function Index() {
-  return <h1>The Home Page</h1>
+import MeetupList from "../components/meetups/MeetupList";
+
+export const DUMMY_MEETUPS = [
+  {
+    id: "m1",
+    title: "A First Meetup",
+    image: "image url",
+    address: "Some address 5, 12345 Some City",
+    description: "This is a first meetup!",
+  },
+  {
+    id: "m2",
+    title: "A Second Meetup",
+    image: "image url",
+    address: "Some address 5, 12345 Some City",
+    description: "This is a Second meetup!",
+  },
+];
+
+function HomePage() {
+  return <MeetupList meetups={DUMMY_MEETUPS} />;
 }
 
-export default Index;
+export default HomePage;
