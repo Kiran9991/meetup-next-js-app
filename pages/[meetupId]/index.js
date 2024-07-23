@@ -1,25 +1,58 @@
 import MeetupDetail from "../../components/meetups/MeetupDetail";
-import { useRouter } from "next/router";
-import { DUMMY_MEETUPS } from "..";
 
-function MeetupDetailPage() {
-  const router = useRouter();
-
-  const meetupId = router.query.meetupId;
-
-  const singleItem = DUMMY_MEETUPS.find((item) => meetupId === item.id);
-
-  console.log(singleItem)
-
+function MeetupDetails() {
   return (
     <MeetupDetail
-      id={meetupId}
-      title={singleItem.title}
-      address={singleItem.address}
-      description={singleItem.description}
-      image={singleItem.image}
+      image="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
+      title="First Meetup"
+      address="Some Street 5, Some City"
+      description="This is a first meetup"
     />
   );
 }
 
-export default MeetupDetailPage;
+export async function getStaticPaths() {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: 'm1',
+        }
+      },
+      {
+        params: {
+          meetupId: 'm2',
+        }
+      },
+      {
+        params: {
+          meetupId: 'm3',
+        }
+      }
+    ]
+  }
+}
+
+export async function getStaticProps(context) {
+  // fetch data for a single meetup
+
+  const meetupId = context.params.meetupId;
+
+  console.log(meetupId);
+
+  return {
+    props: {
+      meetupData: {
+        image:
+          "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+        id: meetupId,
+        title: "First Meetup",
+        address: "Some Street 5, Some City",
+        description: "This is a first meetup",
+      },
+    },
+  };
+}
+
+export default MeetupDetails;
